@@ -3,9 +3,10 @@
 <p>
 	<img alt="python" src="https://img.shields.io/badge/Python-1E90FF?logo=python&logoColor=white">
     <img alt="opencv" src="https://img.shields.io/badge/OpenCV-1F3AF7?logo=opencv&logoColor=01F701">
-    <img alt="numpy" src="https://img.shields.io/badge/OpenCV-4AA6C9?logo=numpy&logoColor=white">
+    <img alt="numpy" src="https://img.shields.io/badge/numpy-4AA6C9?logo=numpy&logoColor=white">
     <img alt="jupyter" src="https://img.shields.io/badge/Jupyter-ededed?logo=jupyter&logoColor=F37726"/>
 </p>
+
 
 This project involves loading multiple images of chess boards and utilizing the matchTemplate method of OpenCV to detect the pieces present on each board. As a result of this process, the output includes a comprehensive list of the detected chess piece names.
 
