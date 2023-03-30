@@ -11,6 +11,7 @@ CHESS_BOARD_OUTPUT_DIR = os.path.join('dist')
 SHOW_IMAGE = True
 EXPORT_IMAGE = True
 
+# The threshold values for each chess piece can be adjusted according to the image quality
 chessPieceThreshold = {
     'bishop': 0.2,
     'bishop_black': 0.3,
@@ -33,7 +34,7 @@ for path in CHESS_PIECE_DIR:
     fileName = re.search('[\w() -]+?(?=\.)', baseName).group(0)
     pieceImage = cv2.imread(path, cv2.IMREAD_UNCHANGED)
     chessPieceImages[fileName] = (pieceImage, chessPieceThreshold[fileName])
-    
+
 chessBoardImages = dict()
 
 for idx, path in enumerate(CHESS_BOARD_DIR):
@@ -41,8 +42,7 @@ for idx, path in enumerate(CHESS_BOARD_DIR):
     fileName = re.search('[\w() -]+?(?=\.)', baseName).group(0)
     boardImage = cv2.imread(path)
     chessBoardImages[fileName] = boardImage
-    
-    
+
 def detectPieceOfChess(boardName, boardImage):
     for piece in chessPieceImages:
         pieceImage = chessPieceImages[piece][0]
@@ -66,9 +66,9 @@ def detectPieceOfChess(boardName, boardImage):
             rectangleColor = (0,250,50)
             cv2.rectangle(boardImage, top_left, bottom_right, rectangleColor, 2)
                           
-            textColor = (200,20,20)
-            textPosition =  (top_left[0], top_left[1] + 10) 
-            cv2.putText(boardImage, pieceName[:3], textPosition, cv2.FONT_HERSHEY_SIMPLEX, 0.5, textColor, 1, cv2.LINE_AA)
+            textColor = (0,0,255)
+            textPosition =  (top_left[0], top_left[1])
+            cv2.putText(boardImage, pieceName[:3], textPosition, cv2.FONT_HERSHEY_SIMPLEX, 0.7, textColor, 1, cv2.LINE_AA)
             
             # overwrite the portion of the result that has the match:
             h1 = top_left[1]-h//2
@@ -94,9 +94,9 @@ def detectPieceOfChess(boardName, boardImage):
         
     if SHOW_IMAGE:
         cv2.imshow(boardName, boardImage)
-    
-    cv2.waitKey(0)
-    cv2.destroyAllWindows()
-    
+        
 for boardName in chessBoardImages:
     detectPieceOfChess(boardName, chessBoardImages[boardName])
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
