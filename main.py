@@ -13,28 +13,28 @@ EXPORT_IMAGE = True
 
 # The threshold values for each chess piece can be adjusted according to the image quality
 chessPieceThreshold = {
-    'bishop': 0.2,
-    'bishop_black': 0.3,
-    'king': 0.2,
-    'king_black': 0.2,
-    'knight':0.1,
-    'knight_black': 0.2,
-    'pawn': 0.15,
-    'pawn_black': 0.3,
-    'queen': 0.2,
-    'queen_black': 0.2,
-    'rook': 0.2,
-    'rook_black': 0.2,
+    'B': 0.2, #bishop
+    'b': 0.3, #bishop_black
+    'K': 0.2, #king
+    'k': 0.2, #king_black
+    'N': 0.1, #knight
+    'n': 0.2, #knight_black
+    'P': 0.15,#pawn
+    'p': 0.3, #pawn_black
+    'Q': 0.2, #queen
+    'q': 0.2, #queen_black
+    'R': 0.2, #rook
+    'r': 0.2, #rook_black
 }
 
 chessPieceImages = dict()
 
 for path in CHESS_PIECE_DIR:
     baseName = os.path.basename(path)
-    fileName = re.search('[\w() -]+?(?=\.)', baseName).group(0)
+    fileName = re.search('[\w() -]+?(?=\.)', baseName).group(0)[0]
     pieceImage = cv2.imread(path, cv2.IMREAD_UNCHANGED)
     chessPieceImages[fileName] = (pieceImage, chessPieceThreshold[fileName])
-
+    
 chessBoardImages = dict()
 
 for idx, path in enumerate(CHESS_BOARD_DIR):
@@ -47,7 +47,6 @@ def detectPieceOfChess(boardName, boardImage):
     for piece in chessPieceImages:
         pieceImage = chessPieceImages[piece][0]
         pieceThreshold = chessPieceImages[piece][1]
-        pieceColor = 'black' if piece.find('black') > 0 else 'white'
         pieceName = piece
         
         boardImageGray = cv2.cvtColor(boardImage, cv2.COLOR_BGR2GRAY)
@@ -66,9 +65,9 @@ def detectPieceOfChess(boardName, boardImage):
             rectangleColor = (0,250,50)
             cv2.rectangle(boardImage, top_left, bottom_right, rectangleColor, 2)
                           
-            textColor = (0,0,255)
-            textPosition =  (top_left[0], top_left[1])
-            cv2.putText(boardImage, pieceName[:3], textPosition, cv2.FONT_HERSHEY_SIMPLEX, 0.7, textColor, 1, cv2.LINE_AA)
+            textColor = (255,0,0) if pieceName.isupper() else (0,0,255) # white piece is blue and black piece is red
+            textPosition =  (top_left[0], top_left[1] + 20)
+            cv2.putText(boardImage, pieceName, textPosition, cv2.FONT_HERSHEY_SIMPLEX, 0.7, textColor, 2, cv2.LINE_AA)
             
             # overwrite the portion of the result that has the match:
             h1 = top_left[1]-h//2
@@ -97,6 +96,6 @@ def detectPieceOfChess(boardName, boardImage):
         
 for boardName in chessBoardImages:
     detectPieceOfChess(boardName, chessBoardImages[boardName])
-
+    
 cv2.waitKey(0)
 cv2.destroyAllWindows()

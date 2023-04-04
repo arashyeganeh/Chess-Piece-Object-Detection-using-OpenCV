@@ -17,6 +17,18 @@ This project involves loading multiple images of chess boards and utilizing the 
     <img src="dist/board (1).jpg" />
 </p>
 
+
+|                Piece                 |      Name      | Short Name |                   Piece                    |      Name      | Short Name |
+| :----------------------------------: | :------------: | :--------: | :----------------------------------------: | :------------: | :--------: |
+|  ![King (White)](chess_piece/K.png)  |  King (White)  |     K      |  ![King (black)](chess_piece/k_black.png)  |  King (black)  |     k      |
+| ![Queen (white)](chess_piece/Q.png)  | Queen (White)  |     Q      | ![Queen (black)](chess_piece/q_black.png)  | Queen (black)  |     q      |
+|  ![Rook (White)](chess_piece/R.png)  |  Rook (White)  |     R      |  ![Rook (black)](chess_piece/r_black.png)  |  Rook (black)  |     r      |
+| ![Bishop (white)](chess_piece/B.png) | Bishop (White) |     B      | ![Bishop (black)](chess_piece/b_black.png) | Bishop (black) |     b      |
+| ![Knight (White)](chess_piece/N.png) | Knight (White) |     N      | ![Knight (black)](chess_piece/n_black.png) | Knight (black) |     n      |
+|  ![Pawn (White)](chess_piece/P.png)  |  Pawn (White)  |     P      |  ![Pawn (black)](chess_piece/p_black.png)  |  Pawn (black)  |     p      |
+
+
+
 ## Requirements
 
 - Python 3.x
